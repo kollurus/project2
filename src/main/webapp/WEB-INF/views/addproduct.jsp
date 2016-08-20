@@ -14,7 +14,7 @@
 <style type="text/css">
 h1 {
 	color: white;
-	text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+	<!--text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;-->
 	text-align: center;
 	font-size: 40px;
 }
@@ -28,11 +28,11 @@ th, td {
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: #FFDAB9}
 
 th {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #DC143C;
+    color: black;
 }
 </style>
 </head>
@@ -42,6 +42,10 @@ th {
 		ng-init="getDataFromServer()">
 
 		<h1>PRODUCT MODULE</h1>
+		
+		
+	<li class="active" ><a href="perform_logout"
+							class="w3-hover-none"><span class="glyphicon glyphicon-log-out"></span></a></li>
 		<form:form action="${addAction}" commandName="product" enctype="multipart/form-data" method="post">
 
 			<table border="1" cellpadding="10" cellspacing="10" align="center">

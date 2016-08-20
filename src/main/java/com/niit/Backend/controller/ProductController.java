@@ -42,7 +42,7 @@ public class ProductController {
 
 	@RequestMapping(value = { "addproduct", "editproduct/addproduct" }, method = RequestMethod.POST)
 	public String addProduct(@ModelAttribute("product") Product product , HttpServletRequest request) {
-		String path=request.getSession().getServletContext().getRealPath("/")+"\\resources\\Images\\product\\";
+		String path=request.getSession().getServletContext().getRealPath("/")+"\\resources\\images\\product\\";
 		productDAO.saveorUpdate(product);
 		MultipartFile file=product.getImage();
 		MultiPartController.upload(path, file,product.getId()+".jpg");
@@ -62,7 +62,7 @@ public class ProductController {
 
 	@RequestMapping(value = { "removeproduct/{id}", "editproduct/removeproduct/{id}" })
 	public String removeproduct(@PathVariable("id") String id, Model model,HttpServletRequest request) throws Exception {
-		String path=request.getSession().getServletContext().getRealPath("/")+"\\resources\\Images\\product\\";
+		String path=request.getSession().getServletContext().getRealPath("/")+"\\resources\\images\\product\\";
 		MultiPartController.deleteimage(path, id+".jpg");
 		productDAO.delete(id);
 		model.addAttribute("message", "Successfully Deleted");

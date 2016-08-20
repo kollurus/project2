@@ -8,6 +8,7 @@
 <html>
 <head>
 
+
 <title>Bootstrap Demo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,6 +36,61 @@
 	width: 70%;
 	margin: auto;
 	height: 400;
+}
+</style>
+<style>
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+div.center {text-align: center;}
+
+
+
+.row well{
+	background-color: #b29d85;
+	/*border-bottom	: 2px groove black;
+	height: 100px;*/
+}
+.row well{
+	font-family: 'Lucida', Georgia, serif;
+	font-size: 38px;
+	font-weight: normal;
+	padding: 19px;
+	padding-top: 10px;
+	margin: 5px;
+	margin-bottom: 10px;
+	color: black;
+	text-align: left;
+	width: 1020px;
+	height: .3em;
+	
+}
+.panel-default > .panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
 }
 </style>
 <!-- ##########################################################################################################################
@@ -69,20 +125,26 @@
 		</form>
 					<c:choose>
 					<c:when test="${LoggedIn}">
-
-						<li style="float: right"><a href="perform_logout"
-							class="w3-hover-none"><i class="glyphicon glyphicon-log-out"></i></a></li>
-						<c:choose>	
+					
+                    <ul class="nav navbar-nav navbar-right">
+                    <c:choose>	
 						<c:when test="${!Administrator}">	
-						<li style="float: right"><a href="viewcart/${userId}"
-							class="w3-hover-none"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+						<li class="active"><a href="viewcart/${userId}"
+							class="w3-hover-none"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 						</c:when>
 						</c:choose>
+						
+						<li class ="active"><a href="#" class="w3-hover-none"><span
+								class="glyphicon glyphicon-user"></span> Hi, ${name}</a></li>
 
-						<li style="float: right"><a href="#" class="w3-hover-none"><i
-								class="glyphicon glyphicon-user"></i> Hi, ${name}</a></li>
+						<li class="active" ><a href="perform_logout"
+							class="w3-hover-none"><span class="glyphicon glyphicon-log-out"></span></a></li>
+						
+
+						
+								</ul>
 					</c:when>
-
+                   
 					<c:otherwise>
 						<div class="collapse navbar-collapse" style="color: red">
 					<ul class="nav navbar-nav navbar-right">
@@ -98,7 +160,11 @@
 				</div>
 					</c:otherwise>
 				</c:choose>
-				</ul>
+				
+				</nav>
+				</nav>
+				
+	
 <!-- ##############################################################################################################################				
  -->				
 				
@@ -106,23 +172,29 @@
 		<c:when test="${!Administrator}">	
 			<!-- Category List -->
 			<c:if test="${!empty categoryList}">
-				<div>
-				
-						<ul class="nav navbar-nav">
-					
-						
+			<div class="panel panel-default">
+  <div class="panel-body">
+							
+	     <div class="center">
+           <ul class="pagination">
 						<c:forEach items="${categoryList}" var="category">
 							<li><a href="${category.name}" class="w3-hover-none"><i class="fa fa-list-alt" aria-hidden="true"></i> ${category.name}</a></li>
 						</c:forEach>
 					
 					</ul>
+					</div>
+				</div>	
 				</div>
 			</c:if>	
 		</c:when>	
 	
 		<c:when test="${Administrator}">
-			<div>
-			<ul class="nav navbar-nav">
+			<div class="panel panel-default">
+  <div class="panel-body">
+							
+	     <div class="center">
+           <ul class="pagination">
+			
 				<li><a href="product"class="w3-hover-none"><i class="glyphicon glyphicon-list"
 					aria-hidden="true"></i> Products</a></li>
 				<li><a href="category" class="w3-hover-none"><i class="glyphicon glyphicon-list"
@@ -133,8 +205,8 @@
 			</div>
 		</c:when>
 	</c:choose>		
-	</nav>
-	</div>
+	
+	
 	
 	<!-- Category List End -->
 	<c:choose>
@@ -191,6 +263,7 @@
 								<li data-target="#myCarousel" data-slide-to="1"></li>
 								<li data-target="#myCarousel" data-slide-to="2"></li>
 								<li data-target="#myCarousel" data-slide-to="3"></li>
+								<li data-target="#myCarousel" data-slide-to="4"></li>
 							</ol>
 
 							<!-- Wrapper for slides -->
@@ -203,7 +276,12 @@
 
 								<div class="item">
 									<img
-										src="C:\Users\Sneha\Pictures\Camera Roll\SHAREit\Picture\FB_IMG_1462785589166.jpg"
+										src="C:\Users\Sneha\Downloads\long_skirts_and_crop_tops_ashwinireddy.jpg"
+										alt="Chania" width="460" height="345">
+								</div>
+								<div class="item">
+									<img
+										src="C:\Users\Sneha\Downloads\front-diva-dresses_d600.jpg"
 										alt="Chania" width="460" height="345">
 								</div>
 
@@ -215,7 +293,7 @@
 
 								<div class="item">
 									<img
-										src="C:\Users\Sneha\Pictures\Camera Roll\SHAREit\Picture\big-lap-western-wear-2015.jpg"
+										src="C:\Users\Sneha\Downloads\OG-Ivory-Bridal-price-list-comparison-hotel-wedding-planner-dress-gown.jpg"
 										alt="Flower" width="460" height="345">
 								</div>
 							</div>
@@ -232,60 +310,64 @@
 							</a>
 						</div>
 					</div>
+					
 					<br> <br> <br> <br>
 		<!-- ################################################################################################## -->
 <div class="container" style="padding-top: 0px;">
 				<ul class="nav nav-tabs">
 
-					<li class="active col-md-4"><a data-toggle="tab" href="#menu1">GET
-							VERVED WITH FABIC..!</a></li>
-					<li class="col-md-4"><a data-toggle="tab" href="#menu2">ADD
-							ON THE LOOK..</a></li>
-<div class="tab-content">
-					<div id="menu1" class="tab-pane fade in active">
+					<!--  <li class="active col-md-4"><a data-toggle="tab" href="#menu1">GET
+							VERVED WITH FABIC..!</a></li>-->
+				<!--  	<li class="col-md-4"><a data-toggle="tab" href="#menu2">ADD
+							ON THE LOOK..</a></li> -->
+<div class="tab-content"></div>
+					<div class="row well" style ="background-color: #666666">GET VERVED WITH FABRIC..!
+					</div>
 	  	<div class="row">
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/one.jpg" /> alt="one"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\FB_IMG_1462785589166.jpg" /> alt="one"
 					width="200" height="200"></a>
 			</div>
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/two.jpg" /> alt="two"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\13319693_640692452773824_4323409802269578616_n.jpg" /> alt="two"
 					width="200" height="200"></a>
 			</div>
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/three.jpg" /> alt="three"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\13879297_674243242752078_8507753353229626031_n.jpg" /> alt="three"
 					width="200" height="200"></a>
 			</div>
+			
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/four.jpg" /> alt="four"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\big-lap-western-wear-2015.jpg" /> alt="four"
 					width="200" height="200"></a>
 			</div>
 		</div>
 		<div style="width: 100%; height: 40;"></div>
-		<div id="menu2" class="tab-pane fade">
-						<div class="row">
+		
+						<div class="row well" style ="background-color: #666666">ADD ON THE LOOK..!
+					</div>
 						<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/one.jpg" /> alt="one"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\IMG_20151105_222551.jpg" /> alt="one"
 					width="200" height="200"></a>
 			</div>
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/two.jpg" /> alt="two"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\FB_IMG_1464505940130.jpg" /> alt="two"
 					width="200" height="200"></a>
 			</div>
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/three.jpg" /> alt="three"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\download.jpg" /> alt="three"
 					width="200" height="200"></a>
 			</div>
 			<div class="col-sm-3" style="background-color: #666666;">
 				<a href="${product.id}"><img
-					src=<c:url value="/resources/Images/four.jpg" /> alt="four"
+					src=<c:url value="F:\workspace\project\src\main\webapp\resources\images\IMG_20151105_222604.jpg" /> alt="four"
 					width="200" height="200"></a>
 			</div>
 		</div>
@@ -458,11 +540,17 @@
 
 		<!-- #################################################  FOOTER ###################################################-->
 
-
-
-		<footer>
-			<div class="footer-left">
-				<p>Payment Options</p>
+<div class="container">
+  <h2></h2>
+  <div class="panel-group">
+    <div class="panel panel-inverse">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">"AT YOUR REACH"</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body"><p>Payment Options</p>
 				<a href="#"><i class="glyphicon glyphicon-paypal" aria-hidden="true"></i> </a> . <a
 					href="#"><i class="glyphicon glyphicon-cc-amex" aria-hidden="true"></i> </a> . <a
 					href="#"><i class="glyphicon glyphicon-cc-mastercard" aria-hidden="true"></i>
@@ -474,28 +562,8 @@
 				<p></p>
 				<p></p>
 				
-				<p></p>
-				<section id="conatcat-info">
-					<div class="container">
-						<div class="row">
-							<div class="col-sm-8">
-								<div class="media contact-info wow fadeInDown"
-									data-wow-duration="1000ms" data-wow-delay="600ms">
-									<div class="pull-left">
-									<!--  	<i class="fa fa-phone"></i> -->
-									</div>
-									<div class="media-body">
-										<h2>Have a Question or Need a Custom Quote?</h2>
-										<p>We are grateful for your concern, love to hear from you
-											and just phone call away to serve you. Do reach us at: +0123
-											456 70 80</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--/.container--> </section><!--/#conatcat-info--> <section id="bottom">
-					<div class="container wow fadeInDown" data-wow-duration="1000ms"
+				<p></p></div>
+        <div class="panel-footer"><div class="container wow fadeInDown" data-wow-duration="1000ms"
 						data-wow-delay="600ms">
 						<div class="row">
 							<div class="col-md-3 col-sm-6">
@@ -563,7 +631,13 @@
 							<!--/.col-md-3-->
 						</div>
 					</div>
-					</section><!--/#bottom-->
+					</section><!--/#bottom--></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+		
 					<div class="container">
 						<div class="row">
 
