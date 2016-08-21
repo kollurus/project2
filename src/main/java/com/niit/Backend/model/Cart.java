@@ -20,6 +20,13 @@ public class Cart {
 	private long price;
 	@Column(columnDefinition="int default 1")
 	private int quantity;
+	private String productid;
+	public String getProductid() {
+		return productid;
+	}
+	public void setProductid(String productid) {
+		this.productid = productid;
+	}
 	private String status;
 	public int getId() {
 		return id;

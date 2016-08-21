@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.niit.Backend.dao.CartDAO;
 import com.niit.Backend.dao.CategoryDAO;
 import com.niit.Backend.dao.ProductDAO;
 import com.niit.Backend.dao.UserDetailsDAO;
@@ -27,6 +28,8 @@ public class LoginController {
 	ProductDAO productDAO;
 	@Autowired
 	UserDetailsDAO userDetailsDAO;
+	@Autowired
+	CartDAO cartDAO;
 	
 	@RequestMapping(value = "login")
 	public String DisplayLogin(Model mv) {
@@ -78,6 +81,13 @@ public class LoginController {
 			 }
 		}
 		return "index";
+	}
+	@RequestMapping(value="pay")
+	public String pay(HttpSession session)
+	{
+		cartDAO.pay(((int)session.getAttribute("userId")));
+		session.setAttribute("cartsize",cartDAO.cartsize((int)session.getAttribute("userId")));
+		return "redirect:/index";
 	}
 
 		}

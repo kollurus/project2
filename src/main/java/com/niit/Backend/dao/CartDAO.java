@@ -17,5 +17,13 @@ public interface CartDAO {
 	public void delete(int userId);
 	
 	public long CartPrice(int userId);	
+	
+	public Cart getitem(int cartId);
+	
+public Cart getitem(String prodId,int userId);
+	
+	public long cartsize(int userId);
+	
+	public void pay(int userId);
 	 
 }

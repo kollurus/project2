@@ -28,6 +28,9 @@
 <link href="Content/Site.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+<script	src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
 <!-- 
   ######################################################## STYLE ########################################################
  -->
@@ -92,6 +95,15 @@ div.center {text-align: center;}
   background-color: #f5f5f5;
   border-color: #ddd;
 }
+.footer
+{
+    height: 50px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
 </style>
 <!-- ##########################################################################################################################
  -->
@@ -121,7 +133,12 @@ div.center {text-align: center;}
 						</div>
 					</div> -->
 					<form class="navbar-form navbar-right">
-			<input type="text" class="form-control" placeholder="Search...">
+			<div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search" ng-model="searchcategory">      
+       </div>      
+    </div>
 		</form>
 					<c:choose>
 					<c:when test="${LoggedIn}">
@@ -129,7 +146,7 @@ div.center {text-align: center;}
                     <ul class="nav navbar-nav navbar-right">
                     <c:choose>	
 						<c:when test="${!Administrator}">	
-						<li class="active"><a href="viewcart/${userId}"
+						<li class="active"><a href="viewcart"
 							class="w3-hover-none"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 						</c:when>
 						</c:choose>
@@ -139,13 +156,9 @@ div.center {text-align: center;}
 
 						<li class="active" ><a href="perform_logout"
 							class="w3-hover-none"><span class="glyphicon glyphicon-log-out"></span></a></li>
-						
-
-						
-								</ul>
+					</ul>
 					</c:when>
-                   
-					<c:otherwise>
+                   <c:otherwise>
 						<div class="collapse navbar-collapse" style="color: red">
 					<ul class="nav navbar-nav navbar-right">
 
@@ -155,19 +168,17 @@ div.center {text-align: center;}
 						<li class="active"><a href="login"> <span
 								class="glyphicon glyphicon-user"></span>Sign up
 						</a></li>
-
 					</ul>
 				</div>
 					</c:otherwise>
 				</c:choose>
-				
 				</nav>
 				</nav>
 				
 	
 <!-- ##############################################################################################################################				
  -->				
-				
+					
 		<c:choose>	
 		<c:when test="${!Administrator}">	
 			<!-- Category List -->
@@ -189,7 +200,7 @@ div.center {text-align: center;}
 		</c:when>	
 	
 		<c:when test="${Administrator}">
-			<div class="panel panel-default">
+			<div class="panel panel-danger">
   <div class="panel-body">
 							
 	     <div class="center">
@@ -237,7 +248,17 @@ div.center {text-align: center;}
 			</c:when>
 		</c:choose>
 				
-				
+				<c:choose>
+		<c:when test="${IfViewCartClicked}">
+			<c:import url="/WEB-INF/views/cart.jsp">
+			</c:import>
+		</c:when>
+
+		<c:when test="${IfPaymentClicked}">
+			<c:import url="/WEB-INF/views/Payment.jsp">
+			</c:import>
+		</c:when>
+	</c:choose>
 				
 				
 				
@@ -250,11 +271,7 @@ div.center {text-align: center;}
  -->
 
 		<div style="background-color:#d41243; color:orange ; padding:0px;">
-
-
-
-
-					<div class="container">
+	<div class="container">
 						<br>
 						<div id="myCarousel" class="carousel slide" data-ride="carousel">
 							<!-- Indicators -->
@@ -514,19 +531,28 @@ div.center {text-align: center;}
 								</div> -->
 								
 		<!-- ################################################### Product List ############################################### -->
+	
+	<c:if test="${empty HideOthers}">
 		<c:choose>
 			<c:when test="${!Administrator}">
 				<c:if test="${!empty productList}">
 					<div>
 						<ul>
 							<c:forEach items="${productList}" var="product">
-								<li><a href=" ${product.name}" class="w3-hover-none"><img
-										alt="${product.id}"
-										src="<c:url value="/resources/images/product/${product.id}.jpg"></c:url>"></a></li>
+								<div class="col-xs-2 ">
+									<div class="thumbnail">
+										<img height="150px" width="150px" alt="${product.id}"
+											src="<c:url value="/resources/images/product/${product.id}.jpg"></c:url>">
+										<div class="caption">
+											<p>
+												${product.name}
 								<c:choose>
 									<c:when test="${LoggedIn}">
-										<li><a href="addtoCart/${userId}/${product.id}"
-											class="w3-hover-none">Add to Cart</a></li>
+										<form action="addtoCart/${userId}/${product.id}">
+										<input type="number" value="1" name="quantity"
+											class="w3-hover-none">Add to Cart</a>
+											<input type="submit" value="Add" class="btn btn-xs col-xs-6 btn-primary">
+														</form>
 									</c:when>
 								</c:choose>
 							</c:forEach>
@@ -535,11 +561,11 @@ div.center {text-align: center;}
 				</c:if>
 			</c:when>
 		</c:choose> 
-
+</c:if>
 		<!--############################################### Product List End ##############################################-->
 
 		<!-- #################################################  FOOTER ###################################################-->
-
+<div class = "footer">
 <div class="container">
   <h2></h2>
   <div class="panel-group">
@@ -633,11 +659,7 @@ div.center {text-align: center;}
 					</div>
 					</section><!--/#bottom--></div>
       </div>
-    </div>
-  </div>
-</div>
-
-		
+    	
 					<div class="container">
 						<div class="row">
 
@@ -673,6 +695,10 @@ div.center {text-align: center;}
 						</div>
 	</div>
 					</div>
+					</div>
+  </div>
+</div>
+</div>	
                 </footer>
 					<!-- chat code starts--> <script type='text/javascript'>
 						var fc_CSS = document.createElement('link');

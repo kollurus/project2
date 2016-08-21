@@ -58,10 +58,14 @@ public class CartDAOImpl implements CartDAO {
 		
 	}
 
-	public void delete(int userId) {
+	public void delete(int cartid) {
 		// TODO Auto-generated method stub
-		
+		Cart cart = new Cart();
+		cart.setId(cartid);
+		sessionFactory.getCurrentSession().delete(cart);
 	}
+		
+	
 	
 	@Transactional
 	public long CartPrice(int userId) {
@@ -72,5 +76,44 @@ public class CartDAOImpl implements CartDAO {
 		Long l= (Long) c.uniqueResult();
 		return l;
 		
+	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Cart getitem(int cartId) {
+		String hql = "from"+" Cart"+" where id="+cartId;
+		@SuppressWarnings("rawtypes")
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Cart> list = (List<Cart>) query.list();
+		if (list!= null && !list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
+	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Cart getitem(String prodId, int userId) {
+		String hql = "from"+" Cart"+" where Status='C'and userid="+userId+" and productid="+"'"+prodId+"'";
+		@SuppressWarnings("rawtypes")
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Cart> list = (List<Cart>) query.list();
+		if (list!= null && !list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
+	}
+	@Transactional
+	public long cartsize(int userId) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(Cart.class);
+		c.add(Restrictions.eq("userid", userId));
+		c.add(Restrictions.eq("status","C"));
+		c.setProjection(Projections.count("userid"));
+		long count=(long) c.uniqueResult();
+		return count;
+	}
+	@Transactional
+	public void pay(int userId) {
+		String hql="update Cart set status='P' where userid="+userId;	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.executeUpdate();
 	}
 }

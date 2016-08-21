@@ -13,8 +13,8 @@
 
 <style type="text/css">
 h1 {
-	color: white;
-	text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+	color: pink;
+	<!--text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;-->
 	text-align: center;
 	font-size: 40px;
 }
@@ -28,10 +28,10 @@ th, td {
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: #FFDAB9}
 
 th {
-    background-color: #4CAF50;
+    background-color: #DC143C;
     color: white;
 }
 </style>
